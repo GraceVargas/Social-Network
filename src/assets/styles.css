@@ -16,6 +16,9 @@ body {
     background-color: #6610f2;
     color: #fff;
     height: 60px;
-    position: fixed;
-    top: 0;
 }
+
+#navbar * {
+  color: #fff;
+}
+
