@@ -5,7 +5,10 @@ const Navbar = () => {
   return (
     <>
       <BrowserRouter>
-        <nav className="navbar navbar-expand-lg" id="navbar">
+        <nav
+          className="navbar navbar-expand-lg navbar navbar-dark bg-dark"
+          id="navbar"
+        >
           <div className="container-fluid">
             <NavLink className="navbar-brand" to={"/"}>
               ConectADAs
@@ -28,25 +31,25 @@ const Navbar = () => {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <NavLink
-                    to={"/"}
+                    to={"/login"}
                     className="nav-link active"
                     aria-current="page"
                   >
-                    Iniciar sesión
+                    Ingresar
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink
-                    to={"/"}
+                    to={"/signup"}
                     className="nav-link active"
                     aria-current="page"
                   >
-                    Registrarse{" "}
+                    Registrarse
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink
-                    to={"/"}
+                    to={"/logout"}
                     className="nav-link active"
                     aria-current="page"
                   >
@@ -61,7 +64,7 @@ const Navbar = () => {
                   placeholder="Buscar amigos"
                   aria-label="Search"
                 />
-                <button className="btn btn-outline" type="submit">
+                <button className="btn btn-outline btn-dark" type="submit">
                   Search
                 </button>
               </form>
