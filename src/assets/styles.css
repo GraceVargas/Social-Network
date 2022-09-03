@@ -1,0 +1,21 @@
+/* Layout */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+/* Header */
+
+.header {
+    background-color: #6610f2;
+    color: #fff;
+    height: 60px;
+    position: fixed;
+    top: 0;
+}

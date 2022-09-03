@@ -1,5 +1,15 @@
-const Header = () => {
-  return <div>Header</div>;
+import { FC, ReactNode } from "react";
+
+type Props = {
+  children: ReactNode;
+};
+
+const Header: FC<Props> = ({ children }) => {
+  return (
+    <>
+      <div className="header container-fluid">{children}</div>
+    </>
+  );
 };
 
 export { Header };
