@@ -5,7 +5,7 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ children }) => {
-  return <header className="header container-fluid">{children}</header>;
+  return <header className="header">{children}</header>;
 };
 
 export { Header };
