@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Footer } from "../Footer";
+import { Header } from "../Header";
 import { Main } from "../Main";
 import { Navbar } from "../Navbar";
 
@@ -12,7 +13,7 @@ type Props = {
 const Layout: FC<Props> = ({ children, hideNav, page }) => {
   return (
     <>
-      {!hideNav && <Navbar />}
+      <Header>{!hideNav && <Navbar />}</Header>
       <Main className={`page page-${page}`}>{children}</Main>
       <Footer />
     </>
