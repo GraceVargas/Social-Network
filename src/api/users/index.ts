@@ -1,6 +1,7 @@
+import { User } from "../../types";
 import { mapToArray } from "../helpers";
 
-const getAll = async () => {
+const getAll = async (): Promise<User[]> => {
   try {
     const response = await fetch(
       "https://social-network-265eb-default-rtdb.firebaseio.com/users.json"
@@ -10,7 +11,7 @@ const getAll = async () => {
   } catch (error) {
     throw new Error();
   }
-  };
+};
   
   
   const get = async (id:string) => {
@@ -49,13 +50,13 @@ const add = async (payload: Partial<User>) => {
     body: JSON.stringify(payload),
   };
   try {
-  await fetch(
-    `https://react-app-29176-default-rtdb.firebaseio.com/users.json`,
-    option
-  );
-} catch (error) {
-  throw new Error();
-}
+    await fetch(
+     `https://react-app-29176-default-rtdb.firebaseio.com/users.json`,
+      option
+    );
+  } catch (error) {
+    throw new Error();
+  }
 };
 
 
@@ -69,13 +70,13 @@ const patch = async (id: string, payload: Partial<User>) => {
     body: JSON.stringify(payload),
   };
   try {
-  await fetch(
-    `https://react-app-29176-default-rtdb.firebaseio.com/users${id}.json`,
-    option
-  );
-} catch (error) {
-  throw new Error();
-}
+    await fetch(
+      `https://react-app-29176-default-rtdb.firebaseio.com/users${id}.json`,
+      option
+    );
+  } catch (error) {
+    throw new Error();
+  }
 };
 
 export const usersApi = { getAll, get, remove, add, patch };
