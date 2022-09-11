@@ -1,4 +1,5 @@
 import Stack from "react-bootstrap/Stack";
+import "./styles.scss";
 
 const Footer = () => {
   return (

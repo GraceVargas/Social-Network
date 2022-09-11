@@ -6,16 +6,24 @@ import { Navbar } from "../Navbar";
 
 type Props = {
   children: ReactNode;
+  hideHeader?: boolean;
   hideNav?: boolean;
+  hideFooter?: boolean;
   page?: string;
 };
 
-const Layout: FC<Props> = ({ children, hideNav, page }) => {
+const Layout: FC<Props> = ({
+  children,
+  hideNav,
+  hideHeader,
+  hideFooter,
+  page,
+}) => {
   return (
     <>
-      <Header>{!hideNav && <Navbar />}</Header>
+      {!hideHeader && <Header>{!hideNav && <Navbar />}</Header>}
       <Main className={`page page-${page}`}>{children}</Main>
-      <Footer />
+      {!hideFooter && <Footer />}
     </>
   );
 };
