@@ -12,3 +12,10 @@ export type User =  {
     sessionToken: string,
     state: string,
 }
+
+export type Location =  {
+    id: string,
+    city: string,
+    country: string,
+    state: string,
+}
