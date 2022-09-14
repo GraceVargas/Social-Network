@@ -1,16 +1,19 @@
-import { Layout } from "../../components/common";
+import { Layout, SignUpForm } from "../../components/common";
 import Card from "react-bootstrap/Card";
 import "./styles.scss";
+import { FC } from "react";
 
 const Signup = () => {
   return (
     <>
       <Layout hideHeader hideFooter page="signup">
-        <Card className="card-signup text-center" bg="dark" text="white">
-          <Card.Title as="h1">ConectADAs</Card.Title>
+        <Card className="card-signup" bg="dark" text="white">
+          <Card.Title className="text-center" as="h1">
+            ConectADAs
+          </Card.Title>
           <Card.Body>
             Crea tu cuenta ingresando los siguientes datos:
-            <form action=""></form>
+            <SignUpForm />
           </Card.Body>
         </Card>
       </Layout>
