@@ -1,6 +1,7 @@
+import { Location } from "../../types";
 import { mapToArray } from "../helpers";
 
-const getAll = async () => {
+const getAll = async (): Promise<Location[]> => {
   try {
     const response = await fetch(
       "https://social-network-265eb-default-rtdb.firebaseio.com/locations.json"
