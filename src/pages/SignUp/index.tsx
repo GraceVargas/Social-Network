@@ -1,5 +1,5 @@
 import { Layout, SignUpForm } from "../../components/common";
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 import "./styles.scss";
 import { FC } from "react";
 
