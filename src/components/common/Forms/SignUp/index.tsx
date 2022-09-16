@@ -1,37 +1,57 @@
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { locationsApi } from "../../../../api/locations";
-import { useEffect, useState } from "react";
-import { Location } from "../../../../types";
+import { useEffect, useState, FC } from "react";
+import { Location, UserPayload } from "../../../../types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { defaultValues } from "./defaultValues";
+import { validationSchema } from "./validationSchema";
 
-const SignUpForm = () => {
-  const { register } = useForm();
+type Props = {
+  onSubmit: (formData: UserPayload) => void;
+};
 
+const SignUpForm: FC<Props> = ({ onSubmit }) => {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
     locationsApi.getAll().then((response) => {
       setLocations(response);
     });
+  }, []);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserPayload>({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
   });
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="m-2" controlId="registerName">
-        <Form.Control type="lastname" placeholder="Nombre" />
+        <Form.Control type="name" placeholder="Nombre" {...register("name")} />
+        {errors.name?.message}
       </Form.Group>
       <Form.Group className="m-2" controlId="registerLastName">
-        <Form.Control type="name" placeholder="Apellido" />
+        <Form.Control
+          type="lastname"
+          placeholder="Apellido"
+          {...register("lastname")}
+        />
       </Form.Group>
       <Form.Group className="m-2" controlId="registerEmail">
-        <Form.Control type="email" placeholder="Email" />
+        <Form.Control type="email" placeholder="Email" {...register("email")} />
+        {errors.email?.message}
       </Form.Group>
       <Form.Group className="m-2">
-        <Form.Select name="city">
+        <Form.Select {...register("city")}>
           <option disabled>Ciudad</option>
           {locations.map(({ city, id }) => {
             return (
-              <option value={city} id={id}>
+              <option value={city} id={id} key={id}>
                 {city}
               </option>
             );
@@ -39,11 +59,11 @@ const SignUpForm = () => {
         </Form.Select>
       </Form.Group>
       <Form.Group className="m-2">
-        <Form.Select name="state">
+        <Form.Select {...register("state")}>
           <option disabled>Provincia</option>
           {locations.map(({ state, id }) => {
             return (
-              <option value={state} id={id}>
+              <option value={state} id={id} key={id}>
                 {state}
               </option>
             );
@@ -51,11 +71,11 @@ const SignUpForm = () => {
         </Form.Select>
       </Form.Group>
       <Form.Group className="m-2">
-        <Form.Select name="country">
+        <Form.Select {...register("country")}>
           <option disabled>País</option>
           {locations.map(({ country, id }) => {
             return (
-              <option value={country} id={id}>
+              <option value={country} id={id} key={id}>
                 {country}
               </option>
             );
@@ -63,14 +83,16 @@ const SignUpForm = () => {
         </Form.Select>
       </Form.Group>
       <Form.Group className="m-2" controlId="formBirthDate">
-        <Form.Control type="date" />
+        <Form.Control type="date" {...register("birthdate")} />
         <Form.Text className="text-muted">Fecha de nacimiento</Form.Text>
       </Form.Group>
       <Form.Group className="m-2" controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Contraseña" />
-      </Form.Group>
-      <Form.Group className="m-2" controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Repita su contraseña" />
+        <Form.Control
+          type="password"
+          placeholder="Contraseña"
+          {...register("password")}
+        />
+        {errors.password?.message}
       </Form.Group>
       <Button variant="primary" type="submit" className="m-2">
         Enviar

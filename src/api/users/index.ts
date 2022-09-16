@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { User, UserPayload } from "../../types";
 import { mapToArray } from "../helpers";
 
 const getAll = async (): Promise<User[]> => {
@@ -32,7 +32,7 @@ const remove = async (id: string) => {
     method: "DELETE"};
   try {
     const response = await fetch(
-      `https://react-app-29176-default-rtdb.firebaseio.com/categories/${id}.json`,
+      `https://social-network-265eb-default-rtdb.firebaseio.com/users/${id}.json`,
       option
     );
   } catch (error) {
@@ -41,7 +41,7 @@ const remove = async (id: string) => {
 }
 
 
-const add = async (payload: Partial<User>) => {
+const add = (payload: UserPayload) => {
   const option = {
     method: "POST",
     headers: {
@@ -50,8 +50,8 @@ const add = async (payload: Partial<User>) => {
     body: JSON.stringify(payload),
   };
   try {
-    await fetch(
-     `https://react-app-29176-default-rtdb.firebaseio.com/users.json`,
+    fetch(
+     `https://social-network-265eb-default-rtdb.firebaseio.com/users.json`,
       option
     );
   } catch (error) {
@@ -71,7 +71,7 @@ const patch = async (id: string, payload: Partial<User>) => {
   };
   try {
     await fetch(
-      `https://react-app-29176-default-rtdb.firebaseio.com/users${id}.json`,
+      `https://social-network-265eb-default-rtdb.firebaseio.com/users${id}.json`,
       option
     );
   } catch (error) {

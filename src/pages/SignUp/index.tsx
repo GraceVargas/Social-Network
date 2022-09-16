@@ -1,9 +1,14 @@
 import { Layout, SignUpForm } from "../../components/common";
 import { Card } from "react-bootstrap";
 import "./styles.scss";
-import { FC } from "react";
+import { usersApi } from "../../api";
+import { UserPayload } from "../../types";
 
 const Signup = () => {
+  const handleSubmit = (formData: UserPayload) => {
+    usersApi.add(formData);
+  };
+
   return (
     <>
       <Layout hideHeader hideFooter page="signup">
@@ -13,7 +18,7 @@ const Signup = () => {
           </Card.Title>
           <Card.Body>
             Crea tu cuenta ingresando los siguientes datos:
-            <SignUpForm />
+            <SignUpForm onSubmit={handleSubmit} />
           </Card.Body>
         </Card>
       </Layout>
