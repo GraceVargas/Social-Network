@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { User, UserPayload } from "../../types";
 import { apiDB } from "../../utils";
 import { mapToArray } from "../helpers";
 
@@ -26,13 +26,14 @@ const getAll = async (): Promise<User[]> => {
 const remove = async (id: string) => {
   try {
     const response = await apiDB.delete(`/users/${id}.json`);
+    return response;
   } catch (error) {
     throw new Error();
   }
 }
 
 
-const add = (payload: Partial<User>) => {
+const add = (payload: UserPayload) => {
     try {
     apiDB.post('/users.json', JSON.stringify(payload));
   } catch (error) {
