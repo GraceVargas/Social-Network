@@ -15,9 +15,14 @@ const SignUpForm: FC<Props> = ({ onSubmit }) => {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
-    locationsApi.getAll().then((response) => {
-      setLocations(response);
-    });
+    locationsApi
+      .getAll()
+      .then((response) => {
+        setLocations(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const {
