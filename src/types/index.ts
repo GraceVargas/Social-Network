@@ -15,6 +15,12 @@ export type User =  {
 
 export type UserPayload =  Omit<User, "id" | "sessionToken" | "friends" | "avatar">;
 
+export type LoginFormType = {
+    email: string;
+    password: string;
+  };
+
+
 export type Location =  {
     id: string,
     city: string,
