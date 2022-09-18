@@ -15,6 +15,10 @@ const Login = () => {
               Inicia sesión:
             </Card.Subtitle>
           </Card.Body>
+          <Card.Footer>
+            <small className="m-2">Si aún no tienes cuenta</small>
+            <Card.Link>Registrate</Card.Link>
+          </Card.Footer>
         </Card>
       </Layout>
     </>
