@@ -12,3 +12,12 @@ export type User =  {
     sessionToken: string,
     state: string,
 }
+
+export type UserPayload =  Omit<User, "id" | "sessionToken" | "friends" | "avatar">;
+
+export type Location =  {
+    id: string,
+    city: string,
+    country: string,
+    state: string,
+}
