@@ -1,0 +1,17 @@
+
+.page-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+
+    .card-login {
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        width: 50%;
+        height: 400px;
+        padding: 20px;
+    }
+
+}
