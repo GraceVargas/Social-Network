@@ -1,13 +1,12 @@
 import { User, UserPayload } from "../../types";
+import { apiDB } from "../../utils";
 import { mapToArray } from "../helpers";
+
 
 const getAll = async (): Promise<User[]> => {
   try {
-    const response = await fetch(
-      "https://social-network-265eb-default-rtdb.firebaseio.com/users.json"
-    );
-    const data = await response.json();
-    return mapToArray(data);
+    const response = await apiDB.get("/users.json")
+    return mapToArray(response.data);
   } catch (error) {
     throw new Error();
   }
@@ -16,11 +15,8 @@ const getAll = async (): Promise<User[]> => {
   
   const get = async (id:string) => {
     try {
-    const response = await fetch(
-      `https://social-network-265eb-default-rtdb.firebaseio.com/users/${id}.json`
-    );
-    const data = await response.json();
-    return data;
+    const response = await apiDB.get(`/users/${id}.json`);
+    return response.data;
   } catch (error) {
     throw new Error();
   }
@@ -28,13 +24,9 @@ const getAll = async (): Promise<User[]> => {
 
 
 const remove = async (id: string) => {
-  const option = {
-    method: "DELETE"};
   try {
-    const response = await fetch(
-      `https://social-network-265eb-default-rtdb.firebaseio.com/users/${id}.json`,
-      option
-    );
+    const response = await apiDB.delete(`/users/${id}.json`);
+    return response;
   } catch (error) {
     throw new Error();
   }
@@ -42,18 +34,8 @@ const remove = async (id: string) => {
 
 
 const add = (payload: UserPayload) => {
-  const option = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  };
-  try {
-    fetch(
-     `https://social-network-265eb-default-rtdb.firebaseio.com/users.json`,
-      option
-    );
+    try {
+    apiDB.post('/users.json', JSON.stringify(payload));
   } catch (error) {
     throw new Error();
   }
@@ -62,21 +44,12 @@ const add = (payload: UserPayload) => {
 
 
 const patch = async (id: string, payload: Partial<User>) => {
-  const option = {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  };
   try {
-    await fetch(
-      `https://social-network-265eb-default-rtdb.firebaseio.com/users${id}.json`,
-      option
-    );
+    apiDB.patch(`/users/${id}.json`, JSON.stringify(payload));
   } catch (error) {
     throw new Error();
   }
 };
+
 
 export const usersApi = { getAll, get, remove, add, patch };
