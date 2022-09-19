@@ -1,12 +1,15 @@
 import { Card } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { LoginForm } from "../../components/common/Forms";
+import { useAuth } from "../../hooks/useAuth";
 import { LoginFormType } from "../../types";
 import "./styles.scss";
 
 const Login = () => {
+  const { login } = useAuth();
+
   const handleSubmit = (formData: LoginFormType) => {
-    console.log(formData);
+    login(formData);
   };
 
   return (
