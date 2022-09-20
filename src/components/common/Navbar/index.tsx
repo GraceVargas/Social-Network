@@ -1,15 +1,13 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Navbar, Button, Container, Nav, Form } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 const NavScrollExample = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/">ConectADAs</Navbar.Brand>
+        <NavLink className="navbar-brand" to="/">
+          ConectADAs
+        </NavLink>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -17,9 +15,15 @@ const NavScrollExample = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/login">Ingresar</Nav.Link>
-            <Nav.Link href="/signup">Registrarse</Nav.Link>
-            <Nav.Link href="/logout">Cerrar sesión</Nav.Link>
+            <NavLink className="nav-link" to="/login">
+              Ingresar
+            </NavLink>
+            <NavLink className="nav-link" to="/signup">
+              Registrarse
+            </NavLink>
+            <NavLink className="nav-link" to="/">
+              Cerrar sesión
+            </NavLink>
           </Nav>
           <Form className="d-flex">
             <Form.Control
