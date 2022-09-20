@@ -4,6 +4,7 @@ import { LoginFormType } from "../../types"
 
 const useAuth = () => {
 
+ 
 
     useEffect(() => {
         loginWithToken()
@@ -26,6 +27,7 @@ const useAuth = () => {
 
             if(token) {
             localStorage.setItem('user-token', token)
+            setMe(userLogged);
         }
         }
     }
@@ -36,13 +38,15 @@ const useAuth = () => {
         const storedToken = localStorage.getItem('user-token');
 
         const logged = users.find(user => user.sessionToken === storedToken)        
+
+        if (!me && logged) setMe(logged)
     }
 
     const logOut = (id: string) => {
         usersApi.patch(id, { sessionToken: null })
     }
 
-    return { login, logOut }
+    return { login, logOut, me }
 }
 
 export { useAuth }
