@@ -9,7 +9,7 @@ export type User =  {
     country: string,
     friends: string[],
     password: string,
-    sessionToken: string,
+    sessionToken: string | null,
     state: string,
 }
 

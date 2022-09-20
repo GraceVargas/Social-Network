@@ -1,7 +1,13 @@
+import { useEffect } from "react"
 import { usersApi } from "../../api"
 import { LoginFormType } from "../../types"
 
 const useAuth = () => {
+
+
+    useEffect(() => {
+        loginWithToken()
+    }, [])
 
     const setUserToken = async (id: string) => {
         const newToken = Math.random().toString(36).substr(2);
@@ -24,7 +30,19 @@ const useAuth = () => {
         }
     }
 
-    return { login }
+    const loginWithToken = async () => {
+        const users = await usersApi.getAll()
+
+        const storedToken = localStorage.getItem('user-token');
+
+        const logged = users.find(user => user.sessionToken === storedToken)        
+    }
+
+    const logOut = (id: string) => {
+        usersApi.patch(id, { sessionToken: null })
+    }
+
+    return { login, logOut }
 }
 
 export { useAuth }
