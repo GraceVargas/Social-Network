@@ -1,12 +1,11 @@
-
 import { Layout, SignUpForm } from "../../components/common";
 import { Card } from "react-bootstrap";
 import "./styles.scss";
 import { usersApi } from "../../api";
 import { UserPayload } from "../../types";
+import { withAuth } from "../../hoc";
 
-
-const Signup = () => {
+const SignupPage = () => {
   const handleSubmit = (formData: UserPayload) => {
     usersApi.add(formData);
   };
@@ -14,7 +13,6 @@ const Signup = () => {
   return (
     <>
       <Layout hideHeader hideFooter page="signup">
-
         <Card className="card-signup" bg="dark" text="white">
           <Card.Title className="text-center" as="h1">
             ConectADAs
@@ -22,7 +20,6 @@ const Signup = () => {
           <Card.Body>
             Crea tu cuenta ingresando los siguientes datos:
             <SignUpForm onSubmit={handleSubmit} />
-
           </Card.Body>
         </Card>
       </Layout>
@@ -30,4 +27,4 @@ const Signup = () => {
   );
 };
 
-export { Signup };
+export const Signup = withAuth(SignupPage);
