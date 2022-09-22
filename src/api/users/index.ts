@@ -45,7 +45,8 @@ const add = (payload: UserPayload) => {
 
 const patch = async (id: string, payload: Partial<User>) => {
   try {
-    apiDB.patch(`/users/${id}.json`, JSON.stringify(payload));
+   const response = await apiDB.patch(`/users/${id}.json`, JSON.stringify(payload));
+   return response;
   } catch (error) {
     throw new Error();
   }
