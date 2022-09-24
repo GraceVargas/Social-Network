@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Card } from "react-bootstrap";
-import { Layout } from "../../components/common";
-import { LoginForm } from "../../components/common/Forms";
+import { Alert, Layout, LoginForm } from "../../components/common";
+import { AlertContext } from "../../contexts/alerts";
 import { withAuth } from "../../hoc";
 import { useAuth } from "../../hooks/useAuth";
 import { LoginFormType } from "../../types";
 import "./styles.scss";
 
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, me } = useAuth();
+  const { handleShow } = useContext(AlertContext);
 
-  const handleSubmit = (formData: LoginFormType) => {
-    login(formData);
+  const handleSubmit = async (formData: LoginFormType) => {
+    await login(formData);
+    if (!me) {
+      handleShow();
+    }
   };
 
   return (
@@ -31,6 +35,7 @@ const LoginPage = () => {
             <small className="m-2">Si aún no tienes cuenta</small>
             <Card.Link href="/signup">Registrate</Card.Link>
           </Card.Footer>
+          <Alert>El usuario o la clave son incorrectas.</Alert>
         </Card>
       </Layout>
     </>
