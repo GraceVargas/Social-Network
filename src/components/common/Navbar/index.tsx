@@ -1,7 +1,10 @@
 import { Navbar, Button, Container, Nav, Form } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 const NavScrollExample = () => {
+  const { logOut, me } = useAuth();
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -21,7 +24,13 @@ const NavScrollExample = () => {
             <NavLink className="nav-link" to="/signup">
               Registrarse
             </NavLink>
-            <NavLink className="nav-link" to="/">
+            <NavLink
+              className="nav-link"
+              to="/login"
+              onClick={() => {
+                me && logOut(me?.id);
+              }}
+            >
               Cerrar sesión
             </NavLink>
           </Nav>

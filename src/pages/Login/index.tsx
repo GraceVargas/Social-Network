@@ -1,11 +1,12 @@
 import { Card } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { LoginForm } from "../../components/common/Forms";
+import { withAuth } from "../../hoc";
 import { useAuth } from "../../hooks/useAuth";
 import { LoginFormType } from "../../types";
 import "./styles.scss";
 
-const Login = () => {
+const LoginPage = () => {
   const { login } = useAuth();
 
   const handleSubmit = (formData: LoginFormType) => {
@@ -27,7 +28,7 @@ const Login = () => {
           </Card.Body>
           <Card.Footer>
             <small className="m-2">Si aún no tienes cuenta</small>
-            <Card.Link>Registrate</Card.Link>
+            <Card.Link href="/signup">Registrate</Card.Link>
           </Card.Footer>
         </Card>
       </Layout>
@@ -35,4 +36,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export const Login = withAuth(LoginPage);
