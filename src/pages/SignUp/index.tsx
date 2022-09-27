@@ -4,10 +4,14 @@ import "./styles.scss";
 import { usersApi } from "../../api";
 import { UserPayload } from "../../types";
 import { withAuth } from "../../hoc";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (formData: UserPayload) => {
     usersApi.add(formData);
+    navigate("/login");
   };
 
   return (
