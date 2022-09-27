@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import { usersApi } from "../../api"
 import { AuthContext } from "../../contexts/auth"
-import { LoginFormType } from "../../types"
+import { LoginFormType, User } from "../../types"
 
 const useAuth = () => {
 
@@ -45,8 +45,8 @@ const useAuth = () => {
         }
     }
 
-    const logOut = (id: string) => {
-        usersApi.patch(id, { sessionToken: null });
+    const logOut = (me: User) => {
+        usersApi.patch(me.id, { sessionToken: null });
         setCurrentUser(undefined);
     }
 
