@@ -1,16 +1,15 @@
-import { FC, ReactNode, useContext } from "react";
+import { FC, ReactNode } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { AlertContext } from "../../../contexts/alerts";
 
 type Props = {
   children: ReactNode;
+  show: boolean;
+  handleClose: () => void;
 };
 
-const Alert: FC<Props> = ({ children }) => {
-  const { handleClose, show } = useContext(AlertContext);
-
+const Alert: FC<Props> = ({ children, show, handleClose }) => {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onClose={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Error</Modal.Title>
       </Modal.Header>
