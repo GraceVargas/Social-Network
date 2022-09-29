@@ -36,11 +36,7 @@ const NavScrollExample = () => {
               </NavLink>
             )}
             {me && (
-              <NavLink
-                className="nav-link"
-                to="/login"
-                onClick={() => me && logOut(me)}
-              >
+              <NavLink className="nav-link" to="/login" onClick={logOut}>
                 Cerrar sesión
               </NavLink>
             )}

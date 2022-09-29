@@ -5,11 +5,12 @@ type Props = {
   children: ReactNode;
   show: boolean;
   handleClose: () => void;
+  className: string;
 };
 
-const Alert: FC<Props> = ({ children, show, handleClose }) => {
+const Alert: FC<Props> = ({ children, show, handleClose, className }) => {
   return (
-    <Modal show={show} onClose={handleClose}>
+    <Modal show={show} onHide={handleClose} className={className}>
       <Modal.Header closeButton>
         <Modal.Title>Error</Modal.Title>
       </Modal.Header>

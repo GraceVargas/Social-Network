@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { Alert, Layout, LoginForm } from "../../components/common";
+import { Layout, LoginForm } from "../../components/common";
 import { withAuth } from "../../hoc";
 import { useAlert } from "../../hooks";
 import { useAuth } from "../../hooks/useAuth";
@@ -9,12 +9,16 @@ import "./styles.scss";
 const LoginPage = () => {
   const { login, me } = useAuth();
 
-  const { handleClose, handleShow, show } = useAlert();
+  const { showAlert } = useAlert();
 
   const handleSubmit = async (formData: LoginFormType) => {
-    await login(formData);
-    if (!me) {
-      handleShow();
+    try {
+      await login(formData);
+    } catch (err: any) {
+      showAlert({
+        text: err.toString(),
+        // type: "success",
+      });
     }
   };
 
@@ -35,9 +39,6 @@ const LoginPage = () => {
             <small className="m-2">Si aún no tienes cuenta</small>
             <Card.Link href="/signup">Registrate</Card.Link>
           </Card.Footer>
-          <Alert handleClose={handleClose} show={show}>
-            El usuario o la clave son incorrectas.
-          </Alert>
         </Card>
       </Layout>
     </>

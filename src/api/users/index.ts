@@ -8,7 +8,7 @@ const getAll = async (): Promise<User[]> => {
     const response = await apiDB.get("/users.json")
     return mapToArray(response.data);
   } catch (error) {
-    throw new Error();
+    throw new Error("No se pudo realizar la request");
   }
 };
   

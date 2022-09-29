@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { AlertContext } from "../../contexts";
 
 const useAlert = () => {
-  const [show, setShow] = useState(false);
+  const { setAlertType, handleShow, setContent} = useContext(AlertContext);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const showAlert = ({text, type}: {text: string, type?: string}) => {
+    setContent(text);
+    handleShow();
+    type && setAlertType(type)
+  }
 
-  return { handleClose, handleShow, show };
+  return { showAlert };
 };
 
 export { useAlert };
