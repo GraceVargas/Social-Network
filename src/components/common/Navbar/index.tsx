@@ -1,20 +1,19 @@
-import { useState } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import "./styles.scss";
 
 const NavScrollExample = () => {
   const { logOut, me } = useAuth();
-
-  const [to, setTo] = useState("");
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     await logOut();
-    setTo("/login");
+    navigate("/login");
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" id="navbar">
       <Container fluid>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -44,9 +43,9 @@ const NavScrollExample = () => {
               </NavLink>
             )}
             {me && (
-              <NavLink className="nav-link" to={to} onClick={handleClick}>
+              <Button variant="dark" className="nav-link" onClick={handleClick}>
                 Cerrar sesión
-              </NavLink>
+              </Button>
             )}
           </Nav>
         </Navbar.Collapse>
