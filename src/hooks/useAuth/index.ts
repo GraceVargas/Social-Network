@@ -19,18 +19,29 @@ const useAuth = () => {
 
     const login = async ({ email, password}: LoginFormType) => {
 
-        const users = await usersApi.getAll()
+        try {
+            const users = await usersApi.getAll()
 
-        const userLogged = users.find(user => user.email === email && user.password === password)
 
-        if(userLogged) {
-            const token = await setUserToken(userLogged.id);
+            const userLogged = users.find(user => user.email === email && user.password === password)
+    
+            if(userLogged) {
+                const token = await setUserToken(userLogged.id);
+    
+                if(token) {
+                    localStorage.setItem('user-token', token)
+                    setCurrentUser(userLogged);
+                } else {
+                    throw new Error('No fue posible crear el token')
+                }
+            } else {
+                throw new Error('No existe el usuario')
+            }
 
-            if(token) {
-            localStorage.setItem('user-token', token)
-            setCurrentUser(userLogged);
+        } catch(err: any) {
+            throw new Error(err.toString())
         }
-        }
+
     }
 
     const loginWithToken = async () => {
@@ -45,8 +56,8 @@ const useAuth = () => {
         }
     }
 
-    const logOut = (me: User) => {
-        usersApi.patch(me.id, { sessionToken: null });
+    const logOut = async () => {
+        me && await usersApi.patch(me.id, { sessionToken: null });
         setCurrentUser(undefined);
     }
 

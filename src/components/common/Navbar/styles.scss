@@ -1,0 +1,9 @@
+#navbar {
+    .nav-link {
+        border-radius: 8px;
+        text-align: left;
+        &:hover{ 
+            background-color: rgba(88, 87, 87, 0.712);
+    }
+}
+}
