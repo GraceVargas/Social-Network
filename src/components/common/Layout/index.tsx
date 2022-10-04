@@ -22,7 +22,7 @@ const Layout: FC<Props> = ({
   return (
     <>
       {!hideHeader && <Header>{!hideNav && <Navbar />}</Header>}
-      <Main className={`page page-${page}`}>{children}</Main>
+      <Main className={`page page-${page} py-5`}>{children}</Main>
       {!hideFooter && <Footer />}
     </>
   );
