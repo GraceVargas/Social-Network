@@ -1,1 +1,1 @@
-export { apiDB } from './axios'
+export { apiDB, apiMovies } from './axios'
