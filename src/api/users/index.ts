@@ -1,5 +1,5 @@
 import { User, UserPayload } from "../../types";
-import { apiDB } from "../../utils";
+import { apiDB } from '@utils'
 import { mapToArray } from "../helpers";
 
 

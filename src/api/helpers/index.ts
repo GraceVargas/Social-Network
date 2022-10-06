@@ -1,5 +1,5 @@
-export const mapToArray = (object: any) => {
-    const array = [];
+export function mapToArray<T>(object: any) {
+    const array: T[] = [];
   
     for (const elem in object) {
       array.push({
