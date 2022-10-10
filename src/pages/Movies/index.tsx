@@ -14,7 +14,7 @@ const MoviesPage = () => {
     moviesApi
       .search(movieSearched, 1)
       .then((data) => {
-        setMovies(data);
+        setMovies(data.results);
       })
       .catch((err: any) => {
         console.log(err);
@@ -42,8 +42,13 @@ const MoviesPage = () => {
             movies.map((movie) => {
               return (
                 <>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={`poster-${movie.title}`}
+                  />
+
                   <div>{movie.title}</div>
-                  <div>{movie.poster_path}</div>
+                  <div>{movie.overview}</div>
                 </>
               );
             })}
