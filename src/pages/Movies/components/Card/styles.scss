@@ -1,0 +1,16 @@
+.movie-card {
+    border: 1px solid #212529;
+    height: 850px;
+    margin-bottom: 7px;
+
+    .card-text {
+        height: 300px;
+        overflow-y: scroll;
+    }
+
+    button {
+        position: absolute;
+        bottom: 30px;
+    }
+ 
+}

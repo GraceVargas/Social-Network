@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import { moviesApi } from "../../api/movies";
 import { useState, useEffect } from "react";
 import { Movie } from "@types";
+import { MovieCard } from "./components";
+import { Col, Container, Row } from "react-bootstrap";
 
 const MoviesPage = () => {
   const [movieSearched, setMovieSearched] = useState("");
@@ -24,35 +26,31 @@ const MoviesPage = () => {
   return (
     <>
       <Layout page="movies">
-        <Form className="m-4" id="">
-          <div>
-            <Form.Control
-              type="text"
-              placeholder="Buscar película"
-              id="search-movie"
-              value={movieSearched}
-              onChange={(e) => {
-                setMovieSearched(e.target.value);
-              }}
-            />
-          </div>
-        </Form>
-        <div>
-          {movies &&
-            movies.map((movie) => {
-              return (
-                <>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={`poster-${movie.title}`}
-                  />
-
-                  <div>{movie.title}</div>
-                  <div>{movie.overview}</div>
-                </>
-              );
-            })}
-        </div>
+        <Container fluid>
+          <Form className="m-4" id="">
+            <div>
+              <Form.Control
+                type="text"
+                placeholder="Buscar película"
+                id="search-movie"
+                value={movieSearched}
+                onChange={(e) => {
+                  setMovieSearched(e.target.value);
+                }}
+              />
+            </div>
+          </Form>
+          <Row>
+            {movies &&
+              movies.map((movie) => {
+                return (
+                  <Col sm={3} lg={2}>
+                    {MovieCard({ movie })}
+                  </Col>
+                );
+              })}
+          </Row>
+        </Container>
       </Layout>
     </>
   );
