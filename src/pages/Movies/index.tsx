@@ -4,24 +4,36 @@ import Form from "react-bootstrap/Form";
 import { moviesApi } from "../../api/movies";
 import { useState, useEffect } from "react";
 import { Movie } from "@types";
-import { MovieCard } from "./components";
+import { MovieCard, Pagination } from "./components";
 import { Col, Container, Row } from "react-bootstrap";
+import "./styles.scss";
+import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-  const [movieSearched, setMovieSearched] = useState("");
-
   const [movies, setMovies] = useState<Movie[]>();
+  const [totalPages, setTotalPages] = useState<number>();
+
+  const [params, setParams] = useSearchParams();
+
+  const handleOnChangePage = (page: number) => {
+    params.set("page", page.toString());
+    setParams(params);
+  };
 
   useEffect(() => {
     moviesApi
-      .search(movieSearched, 1)
+      .search(
+        params.get("movie") || "",
+        params.get("page") ? Number(params.get("page")) : 1
+      )
       .then((data) => {
         setMovies(data.results);
+        setTotalPages(data.total_pages);
       })
       .catch((err: any) => {
         console.log(err);
       });
-  }, [movieSearched]);
+  }, [params]);
 
   return (
     <>
@@ -33,9 +45,10 @@ const MoviesPage = () => {
                 type="text"
                 placeholder="Buscar película"
                 id="search-movie"
-                value={movieSearched}
+                value={params.get("movie") || ""}
                 onChange={(e) => {
-                  setMovieSearched(e.target.value);
+                  params.set("movie", e.target.value);
+                  setParams(params);
                 }}
               />
             </div>
@@ -44,12 +57,19 @@ const MoviesPage = () => {
             {movies &&
               movies.map((movie) => {
                 return (
-                  <Col sm={3} lg={2}>
+                  <Col sm={3} lg={2} key={movie.id}>
                     {MovieCard({ movie })}
                   </Col>
                 );
               })}
           </Row>
+          <div className="pagination-container">
+            <Pagination
+              current={Number(params.get("page"))}
+              total={totalPages!}
+              onChangePage={handleOnChangePage}
+            />
+          </div>
         </Container>
       </Layout>
     </>
