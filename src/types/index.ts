@@ -46,3 +46,19 @@ export type Movie = {
     vote_average: number,
     vote_count: number
 }
+
+export type Comment = {
+    user: Pick<User, "id" | "name" | "lastname">,
+    comment: string,
+    date: Date,
+}
+
+export type Post = {
+    id: string,
+    user: Pick<User, "id" | "name" | "lastname">,
+    image?: string,
+    title: string,
+    detail: string,
+    comments: Comment[],
+    date: Date,
+}

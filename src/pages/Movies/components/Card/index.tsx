@@ -1,11 +1,16 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FC } from "react";
-import { Movie } from "@types";
+import { Movie, Post } from "@types";
 import "./styles.scss";
+import { postsApi } from "@api";
 
 type Props = {
   movie: Movie;
+};
+
+const handleClick = (payload: Post) => {
+  postsApi.add(payload);
 };
 
 const MovieCard: FC<Props> = ({ movie }) => {
