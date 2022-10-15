@@ -8,6 +8,8 @@ const useUsers = () => {
 
     useEffect(() => {
         getUsers();
+        console.log(users);
+        
     }, [])
 
     const getUsers = async () => {
