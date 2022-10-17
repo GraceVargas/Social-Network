@@ -1,5 +1,4 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import { Button, Card } from "react-bootstrap";
 import { FC } from "react";
 import { Movie, Post } from "@types";
 import "./styles.scss";
