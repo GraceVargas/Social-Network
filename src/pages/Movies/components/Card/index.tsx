@@ -3,17 +3,13 @@ import Card from "react-bootstrap/Card";
 import { FC } from "react";
 import { Movie, Post } from "@types";
 import "./styles.scss";
-import { postsApi } from "@api";
 
 type Props = {
   movie: Movie;
+  handleClick: (payload: Post) => void;
 };
 
-const handleClick = (payload: Post) => {
-  postsApi.add(payload);
-};
-
-const MovieCard: FC<Props> = ({ movie }) => {
+const MovieCard: FC<Props> = ({ movie, handleClick }) => {
   return (
     <Card className="movie-card" key={movie.id}>
       <Card.Img
@@ -24,7 +20,9 @@ const MovieCard: FC<Props> = ({ movie }) => {
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text className="card-text">{movie.overview}</Card.Text>
-        <Button variant="primary">Compartir</Button>
+        <Button variant="primary" onClick={handleClick()}>
+          Compartir
+        </Button>
       </Card.Body>
     </Card>
   );

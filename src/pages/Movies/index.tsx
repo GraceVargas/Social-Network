@@ -3,11 +3,12 @@ import { withAuth } from "../../hoc";
 import Form from "react-bootstrap/Form";
 import { moviesApi } from "../../api/movies";
 import { useState, useEffect } from "react";
-import { Movie } from "@types";
+import { Movie, Post } from "@types";
 import { MovieCard, Pagination } from "./components";
 import { Col, Container, Row } from "react-bootstrap";
 import "./styles.scss";
 import { useSearchParams } from "react-router-dom";
+import { postsApi } from "@api";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<Movie[]>();
@@ -18,6 +19,10 @@ const MoviesPage = () => {
   const handleOnChangePage = (page: number) => {
     params.set("page", page.toString());
     setParams(params);
+  };
+
+  const handleClick = (payload: Post) => {
+    postsApi.add(payload);
   };
 
   useEffect(() => {
@@ -58,7 +63,7 @@ const MoviesPage = () => {
               movies.map((movie) => {
                 return (
                   <Col sm={3} lg={2} key={movie.id}>
-                    {MovieCard({ movie })}
+                    {MovieCard({ movie, handleClick })}
                   </Col>
                 );
               })}
