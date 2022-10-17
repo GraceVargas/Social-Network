@@ -1,10 +1,30 @@
-import { usersApi } from "@api";
-import { useUsers } from "src/hooks/useUsers";
+import { User } from "@types";
+import { FC } from "react";
+import { Button, Card } from "react-bootstrap";
+import "./styles.scss";
 
-const Users = () => {
-  const {} = useUsers;
+type Props = {
+  users: User[];
+};
 
-  return <div>Users</div>;
+const Users: FC<Props> = ({ users }) => {
+  return (
+    <Card bg="dark">
+      {users.map((user) => {
+        return (
+          <Card className="user-card" bg="dark" border="primary" key={user.id}>
+            <Card.Body className="d-flex">
+              {`${user.name} ${user.lastname}`}{" "}
+              <div className="ms-auto">
+                {" "}
+                <a href="/">+</a>
+              </div>
+            </Card.Body>
+          </Card>
+        );
+      })}
+    </Card>
+  );
 };
 
 export { Users };

@@ -1,12 +1,12 @@
+import { useUsers } from "@hooks";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { useUsers } from "src/hooks/useUsers";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
+import { Users } from "./components";
 import "./styles.scss";
 
 const HomePage = () => {
   const { users } = useUsers();
-  console.log(users);
 
   return (
     <>
@@ -23,6 +23,7 @@ const HomePage = () => {
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que aún no seguís</Card.Title>
+                    <Users users={users} />
                   </Card.Body>
                 </Card>
               </aside>

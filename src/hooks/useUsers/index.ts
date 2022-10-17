@@ -10,7 +10,7 @@ const useUsers = () => {
         getUsers();
         console.log(users);
         
-    }, [])
+    })
 
     const getUsers = async () => {
         try {
