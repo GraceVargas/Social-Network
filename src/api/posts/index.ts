@@ -1,10 +1,10 @@
-import { Post } from "../../types";
+import { Post, PostPayload } from "../../types";
 import { apiDB } from '@utils'
 import { mapToArray } from "../helpers";
 
 
 
-const add = (payload: Post) => {
+const add = (payload: PostPayload) => {
     try {
     apiDB.post('/posts.json', JSON.stringify(payload));
   } catch (error) {

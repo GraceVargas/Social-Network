@@ -3,16 +3,30 @@ import { withAuth } from "../../hoc";
 import Form from "react-bootstrap/Form";
 import { moviesApi } from "../../api/movies";
 import { useState, useEffect } from "react";
-import { Movie, Post } from "@types";
+import { Movie, PostPayload } from "@types";
 import { MovieCard, Pagination } from "./components";
 import { Col, Container, Row } from "react-bootstrap";
 import "./styles.scss";
 import { useSearchParams } from "react-router-dom";
-import { postsApi } from "@api";
+import { useAuth, usePosts } from "@hooks";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<Movie[]>();
   const [totalPages, setTotalPages] = useState<number>();
+  const { me } = useAuth();
+  console.log(me);
+
+  const { addPost } = usePosts();
+
+  const initialData: PostPayload = {
+    user: { id: "", name: "", lastname: "" },
+    image: "",
+    title: "",
+    detail: "",
+    date: new Date(),
+  };
+
+  const [newPost, setNewPost] = useState(initialData);
 
   const [params, setParams] = useSearchParams();
 
@@ -21,8 +35,8 @@ const MoviesPage = () => {
     setParams(params);
   };
 
-  const handleClick = (payload: Post) => {
-    postsApi.add(payload);
+  const handleClick = async (payload: PostPayload) => {
+     await addPost(payload);
   };
 
   useEffect(() => {
@@ -61,11 +75,22 @@ const MoviesPage = () => {
           <Row>
             {movies &&
               movies.map((movie) => {
+                me && setNewPost({
+                  user: { id: me.id, name: me.name, lastname: me.lastname },
+                  image: movie.poster_path,
+                  title: movie.title,
+                  detail: movie.overview,
+                  date: new Date(),
+                })
                 return (
                   <Col sm={3} lg={2} key={movie.id}>
-                    {MovieCard({ movie, handleClick })}
+                    {MovieCard({
+                      movie, 
+                      handleClick(newPost)
+              })
+                  }
                   </Col>
-                );
+                )
               })}
           </Row>
           <div className="pagination-container">

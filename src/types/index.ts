@@ -62,3 +62,5 @@ export type Post = {
     comments: Comment[],
     date: Date,
 }
+
+export type PostPayload = Omit<Post, "id" | "comments">;
