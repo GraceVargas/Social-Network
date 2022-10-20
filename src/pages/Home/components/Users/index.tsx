@@ -1,3 +1,4 @@
+import { useUsers } from "@hooks";
 import { User } from "@types";
 import { FC } from "react";
 import { Button, Card } from "react-bootstrap";
@@ -8,16 +9,19 @@ type Props = {
 };
 
 const Users: FC<Props> = ({ users }) => {
+  const { addFriend } = useUsers();
+
   return (
     <Card bg="dark">
       {users.map((user) => {
         return (
           <Card className="user-card" bg="dark" border="primary" key={user.id}>
             <Card.Body className="d-flex">
-              {`${user.name} ${user.lastname}`}{" "}
+              {`${user.name} ${user.lastname}`}
               <div className="ms-auto">
-                {" "}
-                <a href="/">+</a>
+                <Button variant="link" onClick={() => addFriend(user.id)}>
+                  +
+                </Button>
               </div>
             </Card.Body>
           </Card>
