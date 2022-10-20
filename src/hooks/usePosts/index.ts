@@ -1,5 +1,5 @@
 import { postsApi } from "@api";
-import { Post } from "@types";
+import { Post, PostPayload } from "@types";
 import { useState } from "react"
 
 const usePosts = () => {
@@ -16,7 +16,7 @@ const usePosts = () => {
             }
         }
 
-        const addPost = async (post: Post) => {
+        const addPost = async (post: PostPayload) => {
             try {
             const resp = await postsApi.add(post);
             } catch(err: any) {
