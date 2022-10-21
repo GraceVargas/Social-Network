@@ -7,20 +7,18 @@ const useUsers = () => {
     const { loadUsers, users } = useContext(UsersContext);
 
     useEffect(() => {
-        getUsers();
-        console.log(users);
-        
-    })
+        getUsers();        
+    }, [])
 
     const getUsers = async () => {
         try {
             const response = await usersApi.getAll();
             loadUsers(response);
             
-    }  catch(err: any) {
-        throw new Error(err.toString())
+        }  catch(err: any) {
+            throw new Error(err.toString())
+            }
         }
-    }
 
 
     
