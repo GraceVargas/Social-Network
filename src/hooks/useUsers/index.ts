@@ -29,16 +29,15 @@ const useUsers = () => {
             let friends = me.friends;
             const id = me.id;
         
-            // if (!friends) {
-            //     friends[0] = [idFriend]; 
-            // } else 
-            if (!friends.includes(idFriend)) {
+            if (!friends) {
+                friends = [idFriend]; 
+            } else if (!friends.includes(idFriend)) {
                 friends.push(idFriend)
             }
-            
+            console.log(friends);
             try {
                 const response = await usersApi.patch(id, {friends});
-                console.log(friends);
+
             }  catch(err: any) {
                 throw new Error(err.toString())
                 }
