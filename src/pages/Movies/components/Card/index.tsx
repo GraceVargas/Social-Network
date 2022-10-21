@@ -1,13 +1,14 @@
 import { Button, Card } from "react-bootstrap";
 import { FC } from "react";
-import { Movie } from "@types";
+import { Movie, PostPayload } from "@types";
 import "./styles.scss";
 
 type Props = {
   movie: Movie;
+  onClick: () => void;
 };
 
-const MovieCard: FC<Props> = ({ movie }) => {
+const MovieCard: FC<Props> = ({ movie, onClick }) => {
   return (
     <Card className="movie-card" key={movie.id}>
       <Card.Img
@@ -18,7 +19,9 @@ const MovieCard: FC<Props> = ({ movie }) => {
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text className="card-text">{movie.overview}</Card.Text>
-        <Button variant="primary">Compartir</Button>
+        <Button variant="primary" onClick={onClick}>
+          Compartir
+        </Button>
       </Card.Body>
     </Card>
   );

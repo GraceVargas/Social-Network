@@ -9,18 +9,18 @@ const useUsers = () => {
     const { me } = useAuth();
 
     useEffect(() => {
-        getUsers();
-    },[])
+        getUsers();        
+    }, [])
 
     const getUsers = async () => {
         try {
             const response = await usersApi.getAll();
             loadUsers(response);
             
-    }  catch(err: any) {
-        throw new Error(err.toString())
+        }  catch(err: any) {
+            throw new Error(err.toString())
+            }
         }
-    }
 
     const addFriend = async (idFriend: string) => {
         

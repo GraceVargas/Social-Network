@@ -3,21 +3,29 @@ import { withAuth } from "../../hoc";
 import Form from "react-bootstrap/Form";
 import { moviesApi } from "../../api/movies";
 import { useState, useEffect } from "react";
-import { Movie } from "@types";
+import { Movie, PostPayload } from "@types";
 import { MovieCard, Pagination } from "./components";
 import { Col, Container, Row } from "react-bootstrap";
 import "./styles.scss";
 import { useSearchParams } from "react-router-dom";
+import { useAuth, usePosts } from "@hooks";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<Movie[]>();
   const [totalPages, setTotalPages] = useState<number>();
+  const { me } = useAuth();
+
+  const { addPost } = usePosts();
 
   const [params, setParams] = useSearchParams();
 
   const handleOnChangePage = (page: number) => {
     params.set("page", page.toString());
     setParams(params);
+  };
+
+  const handleClick = (payload: PostPayload) => {
+    addPost(payload);
   };
 
   useEffect(() => {
@@ -55,10 +63,26 @@ const MoviesPage = () => {
           </Form>
           <Row>
             {movies &&
+              me &&
               movies.map((movie) => {
                 return (
                   <Col sm={3} lg={2} key={movie.id}>
-                    {MovieCard({ movie })}
+                    <MovieCard
+                      movie={movie}
+                      onClick={() =>
+                        handleClick({
+                          user: {
+                            id: me.id,
+                            name: me.name,
+                            lastname: me.lastname,
+                          },
+                          image: movie.poster_path,
+                          title: movie.title,
+                          detail: movie.overview,
+                          date: new Date(),
+                        })
+                      }
+                    />
                   </Col>
                 );
               })}
