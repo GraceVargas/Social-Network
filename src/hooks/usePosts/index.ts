@@ -1,15 +1,23 @@
 import { postsApi } from "@api";
-import { Post, PostPayload } from "@types";
-import { useState } from "react"
+import { PostsContext } from "@contexts";
+import { PostPayload } from "@types";
+import { useContext, useEffect } from "react"
 
 const usePosts = () => {
 
-    const [posts, setPosts] = useState<Post[]>([]);
+    const { loadPosts, posts } = useContext(PostsContext);
+
+    useEffect(() => {
+        getPosts();
+        console.log(posts);
+                
+    }, [])
+    
 
     const getPosts = async () => {
         try {
             const response = await postsApi.getAll();
-            setPosts(response);
+            loadPosts(response);
             
         }  catch(err: any) {
             throw new Error(err.toString())

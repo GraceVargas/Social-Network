@@ -1,12 +1,13 @@
-import { useUsers } from "@hooks";
+import { usePosts, useUsers } from "@hooks";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
-import { Users } from "./components";
+import { PostCard, Users } from "./components";
 import "./styles.scss";
 
 const HomePage = () => {
   const { users } = useUsers();
+  const { posts } = usePosts();
 
   return (
     <>
@@ -45,6 +46,9 @@ const HomePage = () => {
                     </Form>
                   </Card.Body>
                 </Card>
+              </div>
+              <div>
+                <PostCard posts={posts} />
               </div>
             </Col>
           </Row>
