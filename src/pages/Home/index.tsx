@@ -1,4 +1,4 @@
-import { usePosts, useUsers } from "@hooks";
+import { usePosts, useUsers, useAuth } from "@hooks";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
@@ -8,6 +8,16 @@ import "./styles.scss";
 const HomePage = () => {
   const { users } = useUsers();
   const { posts } = usePosts();
+  const { me } = useAuth();
+
+  const friends = me?.friends;
+  let postsFriends = [];
+
+  for (let post of posts) {
+    if (friends?.includes(post.user.id)) {
+      postsFriends.push(post);
+    }
+  }
 
   return (
     <>
@@ -48,7 +58,7 @@ const HomePage = () => {
                 </Card>
               </div>
               <div>
-                <PostCard posts={posts} />
+                <PostCard posts={postsFriends} />
               </div>
             </Col>
           </Row>

@@ -3,16 +3,16 @@ import { PostsContext } from "@contexts";
 import { PostPayload } from "@types";
 import { useContext, useEffect } from "react"
 
+
 const usePosts = () => {
 
     const { loadPosts, posts } = useContext(PostsContext);
 
     useEffect(() => {
-        getPosts();
-        console.log(posts);
-                
+        getPosts();                      
     }, [])
     
+
 
     const getPosts = async () => {
         try {
