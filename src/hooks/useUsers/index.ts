@@ -1,10 +1,13 @@
 import { usersApi } from "@api";
+import { useAuth } from "@hooks";
 import { UsersContext } from "@contexts";
 import { useContext, useEffect } from "react"
+import { User } from "@types";
 
 const useUsers = () => {
 
     const { loadUsers, users } = useContext(UsersContext);
+    const { me } = useAuth();
 
     useEffect(() => {
         getUsers();        
@@ -20,9 +23,22 @@ const useUsers = () => {
             }
         }
 
+    const otherUsers = users.filter((user) => user.id !== me?.id);    
 
+    const friends = me?.friends;
+    let userFriends: User[] = [];
+  
+    for (let user of users) {
+      if (friends) {
+        for (let friend of friends) {
+          if (user.id === friend) {
+            userFriends.push(user);
+          }
+        }
+      }
+    }
     
-    return { users }
+    return { users, otherUsers, userFriends }
 }
 
 export { useUsers }

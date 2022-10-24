@@ -1,4 +1,4 @@
-import { usePosts, useUsers, useAuth } from "@hooks";
+import { usePosts, useUsers } from "@hooks";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
@@ -6,18 +6,8 @@ import { PostCard, Users } from "./components";
 import "./styles.scss";
 
 const HomePage = () => {
-  const { users } = useUsers();
-  const { posts } = usePosts();
-  const { me } = useAuth();
-
-  const friends = me?.friends;
-  let postsFriends = [];
-
-  for (let post of posts) {
-    if (friends?.includes(post.user.id)) {
-      postsFriends.push(post);
-    }
-  }
+  const { otherUsers, userFriends } = useUsers();
+  const { postsFriends } = usePosts();
 
   return (
     <>
@@ -29,12 +19,13 @@ const HomePage = () => {
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que seguís</Card.Title>
+                    <Users users={userFriends} removeBtn />
                   </Card.Body>
                 </Card>
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que aún no seguís</Card.Title>
-                    <Users users={users} />
+                    <Users users={otherUsers} addBtn />
                   </Card.Body>
                 </Card>
               </aside>

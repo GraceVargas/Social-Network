@@ -2,11 +2,13 @@ import { postsApi } from "@api";
 import { PostsContext } from "@contexts";
 import { PostPayload } from "@types";
 import { useContext, useEffect } from "react"
+import { useAuth } from "../useAuth";
 
 
 const usePosts = () => {
 
     const { loadPosts, posts } = useContext(PostsContext);
+    const { me } = useAuth();
 
     useEffect(() => {
         getPosts();                      
@@ -32,8 +34,16 @@ const usePosts = () => {
                 }
         }
 
+    const friends = me?.friends;  
+    let postsFriends = [];
+    for (let post of posts) {
+        if (friends?.includes(post.user.id)) {
+        postsFriends.push(post);
+        }
+    }
+
     
-    return { posts, addPost };
+    return { posts, addPost, postsFriends };
 }
 
 export { usePosts }
