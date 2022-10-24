@@ -1,3 +1,5 @@
+import { usersApi } from "@api";
+import { useAuth, useUsers } from "@hooks";
 import { User } from "@types";
 import { FC } from "react";
 import { Button, Card } from "react-bootstrap";
@@ -9,12 +11,10 @@ type Props = {
   removeBtn?: boolean;
 };
 
-const remove = (users: User[], user: User) => {
-  let index = users.indexOf(user);
-  users.splice(index, 1);
-};
-
 const Users: FC<Props> = ({ users, addBtn, removeBtn }) => {
+  const { me } = useAuth();
+  const { friendsIds, removeFriend } = useUsers();
+
   return (
     <Card bg="dark">
       {users.map((user) => {
@@ -27,13 +27,17 @@ const Users: FC<Props> = ({ users, addBtn, removeBtn }) => {
                   <Button
                     className="d-inline"
                     variant="link"
-                    onClick={() => remove(users, user)}
+                    // onClick={() => }>
                   >
                     ➕
                   </Button>
                 )}
-                {removeBtn && (
-                  <Button className="d-inline" variant="link">
+                {friendsIds && removeBtn && (
+                  <Button
+                    className="d-inline"
+                    variant="link"
+                    onClick={() => removeFriend(friendsIds, user.id)}
+                  >
                     ➖
                   </Button>
                 )}

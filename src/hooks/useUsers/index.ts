@@ -25,12 +25,12 @@ const useUsers = () => {
 
     const otherUsers = users.filter((user) => user.id !== me?.id);    
 
-    const friends = me?.friends;
+    const friendsIds = me?.friends;
     let userFriends: User[] = [];
   
     for (let user of users) {
-      if (friends) {
-        for (let friend of friends) {
+      if (friendsIds) {
+        for (let friend of friendsIds) {
           if (user.id === friend) {
             userFriends.push(user);
           }
@@ -38,7 +38,15 @@ const useUsers = () => {
       }
     }
     
-    return { users, otherUsers, userFriends }
+    const removeFriend = (friendsIds: string[], friend: string) => {
+      let index = friendsIds.indexOf(friend);
+      friendsIds.splice(index, 1);
+      me && usersApi.patch(me.id, { friends: friendsIds });
+    };
+
+
+
+    return { users, otherUsers, userFriends, friendsIds, removeFriend }
 }
 
 export { useUsers }
