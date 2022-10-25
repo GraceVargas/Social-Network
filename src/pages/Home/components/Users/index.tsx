@@ -1,5 +1,4 @@
-import { usersApi } from "@api";
-import { useAuth, useUsers } from "@hooks";
+import { useUsers } from "@hooks";
 import { User } from "@types";
 import { FC } from "react";
 import { Button, Card } from "react-bootstrap";
@@ -12,8 +11,7 @@ type Props = {
 };
 
 const Users: FC<Props> = ({ users, addBtn, removeBtn }) => {
-  const { me } = useAuth();
-  const { friendsIds, removeFriend } = useUsers();
+  const { friendsIds, removeFriend, addFriend } = useUsers();
 
   return (
     <Card bg="dark">
@@ -27,7 +25,7 @@ const Users: FC<Props> = ({ users, addBtn, removeBtn }) => {
                   <Button
                     className="d-inline"
                     variant="link"
-                    // onClick={() => }>
+                    onClick={() => addFriend(user.id)}
                   >
                     ➕
                   </Button>
