@@ -9,7 +9,7 @@ import "./styles.scss";
 
 const HomePage = () => {
   const { otherUsers, userFriends } = useUsers();
-  const { postsFriends, addPost } = usePosts();
+  const { postsToLoad, addPost } = usePosts();
   const { me } = useAuth();
 
   const initialData = {
@@ -28,15 +28,6 @@ const HomePage = () => {
         user: { id: me.id, name: me.name, lastname: me.lastname },
       }));
   }, []);
-
-  const friends = me?.friends;
-  let postsFriends = [];
-
-  for (let post of posts) {
-    if (friends?.includes(post.user.id)) {
-      postsFriends.push(post);
-    }
-  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -98,7 +89,7 @@ const HomePage = () => {
                 </Card>
               </div>
               <div>
-                <PostCard posts={postsFriends} />
+                <PostCard posts={postsToLoad} />
               </div>
             </Col>
           </Row>

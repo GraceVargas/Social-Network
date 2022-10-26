@@ -14,14 +14,16 @@ const PostCard: FC<Props> = ({ posts }) => {
           <Card className="card-post" key={post.id} bg="dark" text="white">
             <Card.Body>
               <Row>
-                <Col xs={6} md={3}>
-                  <Card.Img
-                    className="post-card-img"
-                    variant="top"
-                    alt={`post-${post.image}`}
-                    src={`https://image.tmdb.org/t/p/w500/${post.image}`}
-                  />
-                </Col>
+                {post.image && (
+                  <Col xs={6} md={3}>
+                    <Card.Img
+                      className="post-card-img"
+                      variant="top"
+                      alt={`post-${post.image}`}
+                      src={`https://image.tmdb.org/t/p/w500/${post.image}`}
+                    />
+                  </Col>
+                )}
                 <Col>
                   <div className="d-flex justify-content-end">
                     <Card.Subtitle className="mx-4 text-muted align-self-center">

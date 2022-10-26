@@ -35,15 +35,17 @@ const usePosts = () => {
         }
 
     const friends = me?.friends;  
-    let postsFriends = [];
+    let postsToLoad = [];
     for (let post of posts) {
         if (friends?.includes(post.user.id)) {
-        postsFriends.push(post);
+            postsToLoad.push(post);
+        } else if (me && post.user.id === me.id) {
+            postsToLoad.push(post);
         }
     }
 
     
-    return { posts, addPost, postsFriends };
+    return { posts, addPost, postsToLoad };
 }
 
 export { usePosts }
