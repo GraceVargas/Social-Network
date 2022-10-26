@@ -8,8 +8,8 @@ import { PostCard, Users } from "./components";
 import "./styles.scss";
 
 const HomePage = () => {
-  const { users } = useUsers();
-  const { posts, addPost } = usePosts();
+  const { otherUsers, userFriends } = useUsers();
+  const { postsFriends, addPost } = usePosts();
   const { me } = useAuth();
 
   const initialData = {
@@ -53,12 +53,13 @@ const HomePage = () => {
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que seguís</Card.Title>
+                    <Users users={userFriends} removeBtn />
                   </Card.Body>
                 </Card>
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que aún no seguís</Card.Title>
-                    <Users users={users} />
+                    <Users users={otherUsers} addBtn />
                   </Card.Body>
                 </Card>
               </aside>
