@@ -1,12 +1,23 @@
+import { postsApi } from "@api";
 import { Post } from "@types";
 import { FC } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 type Props = {
   posts: Post[];
 };
 
 const PostCard: FC<Props> = ({ posts }) => {
+  let comments: string[] = [];
+
+  const handleSubmit = (id: string, e: any) => {
+    e.preventDefault();
+    comments.push(e.target.value);
+    postsApi.patch(id, { comments: e });
+  };
+
+  console.log(comments);
+
   return (
     <Card className="card-home">
       {posts.map((post) => {
@@ -38,6 +49,19 @@ const PostCard: FC<Props> = ({ posts }) => {
                     {post.detail}
                   </Card.Text>
                 </Col>
+                <Form
+                  className="d-flex"
+                  onSubmit={() => handleSubmit(post.id, comments)}
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Deja tu comentario"
+                    name="comment"
+                  />
+                  <Button variant="link" type="submit">
+                    💬
+                  </Button>
+                </Form>
               </Row>
             </Card.Body>
           </Card>
