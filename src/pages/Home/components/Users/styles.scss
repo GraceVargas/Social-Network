@@ -1,5 +1,14 @@
 
 .user-card {
     margin: 3px;
+
+    button {
+        text-decoration: none;
+        padding: 0;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
 }
 

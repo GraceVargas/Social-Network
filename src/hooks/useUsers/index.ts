@@ -1,10 +1,12 @@
 import { usersApi } from "@api";
 import { UsersContext } from "@contexts";
 import { useContext, useEffect } from "react"
+import { useAuth } from "../useAuth";
 
 const useUsers = () => {
 
     const { loadUsers, users } = useContext(UsersContext);
+    const { me } = useAuth();
 
     useEffect(() => {
         getUsers();        
@@ -20,9 +22,31 @@ const useUsers = () => {
             }
         }
 
+    const addFriend = async (idFriend: string) => {
+        
+        if (me) {
+            
+            let friends = me.friends;
+            const id = me.id;
+        
+            if (!friends) {
+                friends = [idFriend]; 
+            } else if (!friends.includes(idFriend)) {
+                friends.push(idFriend)
+            }
+            console.log(friends);
+            try {
+                const response = await usersApi.patch(id, {friends});
 
-    
-    return { users }
+            }  catch(err: any) {
+                throw new Error(err.toString())
+                }
+        }
+
+    }
+ 
+    return { users, addFriend }
 }
+
 
 export { useUsers }
