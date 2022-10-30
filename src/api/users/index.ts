@@ -33,17 +33,16 @@ const remove = async (id: string) => {
 }
 
 
-const add = (payload: UserPayload) => {
+const add = async (payload: UserPayload) => {
     try {
-    apiDB.post('/users.json', payload);
+    await apiDB.post('/users.json', payload);
   } catch (error) {
     throw new Error();
   }
 };
 
 
-
-const patch = async (id: string, payload: Partial<User> | string[]) => {
+const patch = async (id: string, payload: Partial<User>) => {
   try {
    const response = await apiDB.patch(`/users/${id}.json`, payload);
    return response;

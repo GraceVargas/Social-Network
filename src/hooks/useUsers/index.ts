@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { usersApi } from "@api";
 import { useAuth } from "@hooks";
 import { UsersContext } from "@contexts";
@@ -7,77 +8,53 @@ import { User } from "@types";
 const useUsers = () => {
 
   const { loadUsers, users } = useContext(UsersContext);
-  const { me } = useAuth();
+  const { me, refreshMe } = useAuth();
 
   useEffect(() => {
-      getUsers();       
+      !users && getUsers();       
   }, [])
 
 
   // to get all users 
 
   const getUsers = async () => {
-      try {
-          const response = await usersApi.getAll();
-          loadUsers(response);
-          
-      }  catch(err: any) {
-          throw new Error(err.toString())
-          }
-      }
-
-
-  // to get user object of friends from user loggued (to add posts)
-
-  const usersButMe = users.filter((user) => user.id !== me?.id);
-  let otherUsers: User[] = [];
-
-  const friendsIds = me?.friends;
-  let userFriends: User[] = [];
-
-  for (let user of usersButMe) {
-    if (friendsIds) {
-      for (let friend of friendsIds) {
-        if (user.id === friend) {
-          userFriends.push(user);
-        } else if (user.id !== friend) {
-          otherUsers.push(user)
-        }
-      }
-    } else {
-      otherUsers.push(user);
+    try {
+      const response = await usersApi.getAll();    
+      loadUsers(response);
+    } catch(err: any) {
+      throw new Error(err.toString())
     }
   }
 
-  
-  
-
   // to get users except loggued and friends
- 
 
- 
     
   // to remove friend from user loggued
 
-  const removeFriend = (friendsIds: string[], friend: string) => {
-    let index = friendsIds.indexOf(friend);
-    friendsIds.splice(index, 1);
-    me && usersApi.patch(me.id, { friends: friendsIds });
+  const removeFriend = async (user: User) => {
+    if(me){
+      const friends = me.friends.filter(friend => friend !== user.id);
+      await usersApi.patch(me.id, { friends });
+      await refreshMe()
+      getUsers()
+    }
   };
 
   // to add friend to user loggued
 
-  const addFriend = async (idFriend: string) => {
+  const addFriend = async (user: User) => {
     if (me) {
     let friends = me?.friends;
 
     if (!friends) {
-      friends = [idFriend];
-    } else if (!friends?.find(elem => elem === idFriend)) {
-      friends?.push(idFriend);
+      friends = [user.id];
+    } else if (!friends?.find(elem => elem === user.id)) {
+      friends?.push(user.id);
     }
     try {
-      const response = await usersApi.patch(me.id, { friends });
+      await usersApi.patch(me.id, { friends });
+      await refreshMe()
+      getUsers()
     } catch(err: any) {
       throw new Error(err.toString())
       }
@@ -89,7 +66,7 @@ const useUsers = () => {
 
 
 
-  return { users, otherUsers, userFriends, friendsIds, removeFriend, addFriend }
+  return { users, removeFriend, addFriend }
 }
 
 
