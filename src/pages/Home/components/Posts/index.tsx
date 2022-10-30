@@ -9,12 +9,6 @@ type Props = {
   posts: Post[];
 };
 
-// const initialData: Comment = {
-//   user: { id: "", name: "", lastname: "" },
-//   comment: "",
-//   date: new Date(),
-// };
-
 const PostCard: FC<Props> = ({ posts }) => {
   const { me } = useAuth();
 
