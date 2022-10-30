@@ -64,7 +64,6 @@ const HomePage = () => {
                       <Form.Control
                         type="text"
                         placeholder="Ingresá el título de tu publicación"
-                        name="post-title"
                         onChange={(e) =>
                           setPostText((prevState) => ({
                             ...prevState,
