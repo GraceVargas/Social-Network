@@ -1,4 +1,4 @@
-import { usePosts, useUsers } from "@hooks";
+import { useAuth, usePosts, useUsers } from "@hooks";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
@@ -6,8 +6,11 @@ import { PostCard, Users } from "./components";
 import "./styles.scss";
 
 const HomePage = () => {
-  const { otherUsers, userFriends } = useUsers();
-  const { postsFriends } = usePosts();
+  const { users, removeFriend, addFriend } = useUsers();
+  const { me } = useAuth()
+  // const { postsFriends } = usePosts();
+
+  console.log(me);
 
   return (
     <>
@@ -19,13 +22,24 @@ const HomePage = () => {
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que seguís</Card.Title>
-                    <Users users={userFriends} removeBtn />
+                    <Users 
+                      users={users?.filter( 
+                        (user) => user.id !== me?.id && me?.friends?.includes(user.id) 
+                      )} 
+                      button={ { handleClick: removeFriend, content: <>➖</> } }
+                    />
                   </Card.Body>
                 </Card>
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>
                     <Card.Title>Usuarios que aún no seguís</Card.Title>
-                    <Users users={otherUsers} addBtn />
+                    <Users 
+                      users={users?.filter( 
+                          (user) => user.id !== me?.id && !me?.friends?.includes(user.id) 
+                        )
+                      } 
+                      button={ { handleClick: addFriend, content: <>➕</> }}
+                    />
                   </Card.Body>
                 </Card>
               </aside>
@@ -49,7 +63,7 @@ const HomePage = () => {
                 </Card>
               </div>
               <div>
-                <PostCard posts={postsFriends} />
+                {/* <PostCard posts={postsFriends} /> */}
               </div>
             </Col>
           </Row>
