@@ -2,8 +2,13 @@
 .user-card {
     margin: 3px;
 
-    .plus {
-        background-color: red;
+    button {
+        text-decoration: none;
+        padding: 0;
+
+        &:focus {
+            box-shadow: none;
+        }
     }
 }
 

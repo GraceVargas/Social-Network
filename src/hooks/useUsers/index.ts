@@ -4,7 +4,6 @@ import { useAuth } from "@hooks";
 import { UsersContext } from "@contexts";
 import { useContext, useEffect } from "react"
 import { User } from "@types";
-import { fireEvent } from "@testing-library/react";
 
 const useUsers = () => {
 
@@ -69,5 +68,6 @@ const useUsers = () => {
 
   return { users, removeFriend, addFriend }
 }
+
 
 export { useUsers }
