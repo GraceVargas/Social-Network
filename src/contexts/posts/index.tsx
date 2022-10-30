@@ -2,7 +2,7 @@ import { Post } from "@types";
 import { createContext, FC, ReactNode, useState } from "react";
 
 type PostsContextType = {
-  posts: Post[];
+  posts?: Post[];
   loadPosts: (post: Post[]) => void;
 };
 
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const PostsProvider: FC<Props> = ({ children }) => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>();
   const loadPosts = (post: Post[]) => {
     setPosts(post);
   };

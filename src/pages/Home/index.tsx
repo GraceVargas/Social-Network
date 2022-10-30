@@ -9,7 +9,7 @@ import "./styles.scss";
 
 const HomePage = () => {
   const { users, removeFriend, addFriend } = useUsers();
-  const { postsToLoad, addPost } = usePosts();
+  const { addPost, posts } = usePosts();
   const { me } = useAuth();
 
   const initialData = {
@@ -101,7 +101,15 @@ const HomePage = () => {
                 </Card>
               </div>
               <div>
-                <PostCard posts={postsToLoad} />
+                {posts && (
+                  <PostCard
+                    posts={posts.filter(
+                      (post) =>
+                        post.user.id === me?.id ||
+                        me?.friends?.includes(post.user.id)
+                    )}
+                  />
+                )}
               </div>
             </Col>
           </Row>
