@@ -1,32 +1,39 @@
-import { useUsers } from "@hooks";
+import { useAuth, useUsers } from "@hooks";
 import { User } from "@types";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Button, Card } from "react-bootstrap";
 import "./styles.scss";
 
 type Props = {
-  users: User[];
+  users?: User[];
+  button: {
+    handleClick: (user: User) => void
+    content: ReactNode | string
+  }
 };
 
-const Users: FC<Props> = ({ users }) => {
-  const { addFriend } = useUsers();
-
+const Users: FC<Props> = ({ users, button }) => {
+  
   return (
     <Card bg="dark">
-      {users.map((user) => {
-        return (
+      <Card.Body>
+      {
+        users?.map((user) => (
           <Card className="user-card" bg="dark" border="primary" key={user.id}>
             <Card.Body className="d-flex">
               {`${user.name} ${user.lastname}`}
-              <div className="ms-auto">
-                <Button variant="link" onClick={() => addFriend(user.id)}>
-                  +
-                </Button>
-              </div>
+              <Button
+                className="d-inline"
+                variant="link"
+                onClick={() => button.handleClick(user)}
+              >
+                {button.content}
+              </Button>
             </Card.Body>
           </Card>
-        );
-      })}
+        ))
+      }
+      </Card.Body>
     </Card>
   );
 };
