@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react"
 import { usersApi } from "../../api"
 import { AuthContext } from "../../contexts/auth"
 import { LoginFormType, User } from "../../types"
+import { useUsers } from "../useUsers"
 
 const useAuth = () => {
 
@@ -19,11 +21,10 @@ const useAuth = () => {
 
     const login = async ({ email, password}: LoginFormType) => {
 
+        const users = await usersApi.getAll()
+
         try {
-            const users = await usersApi.getAll()
-
-
-            const userLogged = users.find(user => user.email === email && user.password === password)
+            const userLogged = users?.find(user => user.email === email && user.password === password)
     
             if(userLogged) {
                 const token = await setUserToken(userLogged.id);
@@ -45,23 +46,26 @@ const useAuth = () => {
     }
 
     const loginWithToken = async () => {
+
         const users = await usersApi.getAll()
 
         const storedToken = localStorage.getItem('user-token');
 
-        const logged = users.find(user => user.sessionToken === storedToken)        
-
-        if (!me && logged) {
+        const logged = users?.find(user => user.sessionToken === storedToken)   
+        
+        if (logged) {
             setCurrentUser(logged)
         }
     }
+
+    const refreshMe = async () => { await loginWithToken() }
 
     const logOut = async () => {
         me && await usersApi.patch(me.id, { sessionToken: null });
         setCurrentUser(undefined);
     }
 
-    return { login, logOut, me }
+    return { login, logOut, me, refreshMe }
 }
 
 export { useAuth }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { postsApi } from "@api";
 import { PostsContext } from "@contexts";
 import { PostPayload } from "@types";
@@ -8,10 +9,10 @@ import { useAuth } from "../useAuth";
 const usePosts = () => {
 
     const { loadPosts, posts } = useContext(PostsContext);
-    const { me } = useAuth();
+    const { refreshMe } = useAuth();
 
     useEffect(() => {
-        getPosts();                      
+        !posts && getPosts();     
     }, [])
     
 
@@ -19,33 +20,23 @@ const usePosts = () => {
     const getPosts = async () => {
         try {
             const response = await postsApi.getAll();
-            loadPosts(response);
-            
+            loadPosts(response);           
         }  catch(err: any) {
             throw new Error(err.toString())
-            }
-        }
-
-        const addPost = async (post: PostPayload) => {
-            try {
-            const resp = await postsApi.add(post);
-            } catch(err: any) {
-                throw new Error(err.toString())
-                }
-        }
-
-    const friends = me?.friends;  
-    let postsToLoad = [];
-    for (let post of posts) {
-        if (friends?.includes(post.user.id)) {
-            postsToLoad.push(post);
-        } else if (me && post.user.id === me.id) {
-            postsToLoad.push(post);
         }
     }
 
+    const addPost = async (post: PostPayload) => {
+        try {
+            await postsApi.add(post);
+            await refreshMe();
+            getPosts();
+        } catch(err: any) {
+            throw new Error(err.toString())
+        }
+    }
     
-    return { posts, addPost, postsToLoad };
+    return { posts, addPost };
 }
 
 export { usePosts }

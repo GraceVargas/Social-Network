@@ -2,7 +2,7 @@ import { User } from "@types";
 import { createContext, FC, ReactNode, useState } from "react";
 
 type UsersContextType = {
-  users: User[];
+  users?: User[];
   loadUsers: (user: User[]) => void;
 };
 
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const UsersProvider: FC<Props> = ({ children }) => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>();
   const loadUsers = (user: User[]) => {
     setUsers(user);
   };
