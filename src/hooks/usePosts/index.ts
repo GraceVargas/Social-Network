@@ -9,10 +9,10 @@ import { useAuth } from "../useAuth";
 const usePosts = () => {
 
     const { loadPosts, posts } = useContext(PostsContext);
-    const { me } = useAuth();
+    const { refreshMe } = useAuth();
 
     useEffect(() => {
-        !posts && getPosts();                      
+        !posts && getPosts();     
     }, [])
     
 
@@ -20,7 +20,7 @@ const usePosts = () => {
     const getPosts = async () => {
         try {
             const response = await postsApi.getAll();
-            loadPosts(response);
+            loadPosts(response);           
         }  catch(err: any) {
             throw new Error(err.toString())
         }
@@ -29,22 +29,14 @@ const usePosts = () => {
     const addPost = async (post: PostPayload) => {
         try {
             await postsApi.add(post);
+            await refreshMe();
             getPosts();
         } catch(err: any) {
             throw new Error(err.toString())
         }
     }
-
-    // const friends = me?.friends;  
-    // let postsFriends = [];
-    // for (let post of posts) {
-    //     if (friends?.includes(post.user.id)) {  
-    //     postsFriends.push(post);
-    //     }
-    // }
-
     
-    return { posts, addPost, /* postsFriends */ };
+    return { posts, addPost };
 }
 
 export { usePosts }
