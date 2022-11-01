@@ -1,4 +1,5 @@
 import { Post } from "@types";
+import { formatDate } from "@utils";
 import { FC } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
@@ -30,7 +31,7 @@ const PostCard: FC<Props> = ({ posts }) => {
                       {`${post.user.name} ${post.user.lastname}`}
                     </Card.Subtitle>
                     <span className="align-self-center">
-                      {post.date.toString()}
+                      {formatDate(post.date)}
                     </span>
                   </div>
                   <Card.Title>{post.title}</Card.Title>
