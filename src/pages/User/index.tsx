@@ -1,8 +1,8 @@
 import { Layout } from "../../components/common";
 import { withAuth } from "@hoc";
-import { Card, Container } from "react-bootstrap";
+import { Button, Card, Container } from "react-bootstrap";
 import { useUsers } from "@hooks";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { User } from "@types";
 import { formatDate } from "@utils";
@@ -11,15 +11,14 @@ import "./styles.scss";
 const UserPage = () => {
   const { users } = useUsers();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useState<User[]>();
 
   useEffect(() => {
     const user = users?.filter((user) => user.id === id);
     user && setCurrentUser(user);
-  }, []);
-
-  console.log(id);
+  }, [id]);
 
   return (
     <>
@@ -44,6 +43,7 @@ const UserPage = () => {
                   </>
                 );
               })}
+              <Button onClick={() => navigate("/")}>Volver</Button>
             </Card.Body>
           </Card>
         </Container>
