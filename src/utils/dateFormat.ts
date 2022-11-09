@@ -13,9 +13,6 @@ const formatDate = (inputDate: Date): string => {
   hour = dateToFormat.getHours();
   minutes = dateToFormat.getMinutes();
 
-  if (hour < 1) {
-    date = date + 1; 
-  } 
 
   if (date < 10) {
     date = '0'+ date;
