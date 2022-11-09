@@ -21,4 +21,13 @@ const getAll = async (): Promise<Post[]> => {
     }
   };
 
-export const postsApi = { add, getAll };
+  const patch = async (id: string, payload: Partial<Post>) => {
+    try {
+     const response = await apiDB.patch(`/posts/${id}.json`, JSON.stringify(payload));
+     return response;
+    } catch (error) {
+      throw new Error();
+    }
+  };
+
+export const postsApi = { add, getAll, patch };
