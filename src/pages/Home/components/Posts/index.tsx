@@ -6,7 +6,6 @@ import { FC, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import "./styles.scss";
 
-
 type Props = {
   posts: Post[];
 };
@@ -36,21 +35,21 @@ const PostCard: FC<Props> = ({ posts }) => {
                         src={`https://image.tmdb.org/t/p/w500/${post.image}`}
                       />
                     </Col>
-                )}
-                <Col>
-                  <div className="d-flex justify-content-end">
-                    <Card.Subtitle className="mx-4 text-muted align-self-center">
-                      {`${post.user.name} ${post.user.lastname}`}
-                    </Card.Subtitle>
-                    <span className="align-self-center">
-                      {formatDate(post.date)}
-                    </span>
-                  </div>
-                  <Card.Title>{post.title}</Card.Title>
-                  <Card.Text className="card-text my-3">
-                    {post.detail}
-                  </Card.Text>
-                </Col>
+                  )}
+                  <Col>
+                    <div className="d-flex justify-content-end">
+                      <Card.Subtitle className="mx-4 text-muted align-self-center">
+                        {`${post.user.name} ${post.user.lastname}`}
+                      </Card.Subtitle>
+                      <span className="align-self-center">
+                        {formatDate(post.date)}
+                      </span>
+                    </div>
+                    <Card.Title>{post.title}</Card.Title>
+                    <Card.Text className="card-text my-3">
+                      {post.detail}
+                    </Card.Text>
+                  </Col>
                   {comments &&
                     comments.map((comment) => {
                       return (
@@ -61,7 +60,7 @@ const PostCard: FC<Props> = ({ posts }) => {
                               <span className="comment-user-name">{`${comment.user.name} ${comment.user.lastname}`}</span>
                               {` -  ${comment.comment}`}
                             </p>
-                            <div>{comment.date.toString()}</div>
+                            <div>{formatDate(comment.date)}</div>
                           </div>
                         </div>
                       );

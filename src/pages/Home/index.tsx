@@ -1,7 +1,8 @@
 import { usePosts, useUsers, useAuth } from "@hooks";
-import { PostPayload } from "@types";
+import { PostPayload, User } from "@types";
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
 import { PostCard, Users } from "./components";
@@ -11,6 +12,8 @@ const HomePage = () => {
   const { users, removeFriend, addFriend } = useUsers();
   const { addPost, posts } = usePosts();
   const { me } = useAuth();
+  const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const initialData = {
     user: { id: "", name: "", lastname: "" },
@@ -34,6 +37,10 @@ const HomePage = () => {
     addPost(postText);
   };
 
+  const viewFriend = (user: User) => {
+    navigate(`/user/${user.id}`);
+  };
+
   return (
     <>
       <Layout page="home">
@@ -50,6 +57,10 @@ const HomePage = () => {
                           user.id !== me?.id && me?.friends?.includes(user.id)
                       )}
                       button={{ handleClick: removeFriend, content: <>➖</> }}
+                      extraButton={{
+                        handleClick: viewFriend,
+                        content: <>👁</>,
+                      }}
                     />
                   </Card.Body>
                 </Card>

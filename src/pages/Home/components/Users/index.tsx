@@ -9,9 +9,13 @@ type Props = {
     handleClick: (user: User) => void;
     content: ReactNode | string;
   };
+  extraButton?: {
+    handleClick: (user: User) => void;
+    content: ReactNode | string;
+  };
 };
 
-const Users: FC<Props> = ({ users, button }) => {
+const Users: FC<Props> = ({ users, button, extraButton }) => {
   return (
     <Card bg="dark">
       <Card.Body>
@@ -26,6 +30,15 @@ const Users: FC<Props> = ({ users, button }) => {
               >
                 {button.content}
               </Button>
+              {extraButton && (
+                <Button
+                  className="d-inline"
+                  variant="link"
+                  onClick={() => extraButton.handleClick(user)}
+                >
+                  {extraButton.content}
+                </Button>
+              )}
             </Card.Body>
           </Card>
         ))}

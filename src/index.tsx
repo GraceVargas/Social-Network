@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles.scss";
 import "bootstrap/dist/css/bootstrap.css";
-import { Home, Login, Movies, Signup } from "./pages";
+import { Home, Login, Movies, Signup, UserDetail } from "./pages";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import {
   AuthProvider,
@@ -28,6 +28,7 @@ root.render(
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
                 <Route path="movies" element={<Movies />} />
+                <Route path="user/:id" element={<UserDetail />} />
               </Route>
             </Routes>
           </BrowserRouter>

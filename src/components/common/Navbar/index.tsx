@@ -1,15 +1,13 @@
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import "./styles.scss";
 
 const NavScrollExample = () => {
   const { logOut, me } = useAuth();
-  const navigate = useNavigate();
 
   const handleClick = async () => {
     await logOut();
-    navigate("/login");
   };
 
   return (
