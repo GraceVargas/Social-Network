@@ -7,7 +7,7 @@ import { LoginFormType } from "../../types";
 import "./styles.scss";
 
 const LoginPage = () => {
-  const { login, me } = useAuth();
+  const { login } = useAuth();
 
   const { showAlert } = useAlert();
 
@@ -34,6 +34,10 @@ const LoginPage = () => {
               Inicia sesión:
             </Card.Subtitle>
             <LoginForm onSubmit={handleSubmit} />
+            <p className="test-user">
+              ( Usuario de prueba: Email: user@prueba.com / Contraseña:
+              prueba12345 )
+            </p>
           </Card.Body>
           <Card.Footer>
             <small className="m-2">Si aún no tienes cuenta</small>
