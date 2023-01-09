@@ -24,7 +24,7 @@ const Users: FC<Props> = ({ users, button, extraButton }) => {
             <Card.Body className="d-flex">
               {`${user.name} ${user.lastname}`}
               <Button
-                className="d-inline"
+                className="d-inline ms-auto"
                 variant="link"
                 onClick={() => button.handleClick(user)}
               >

@@ -2,7 +2,7 @@ import { usePosts, useUsers, useAuth } from "@hooks";
 import { PostPayload, User } from "@types";
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "../../components/common";
 import { withAuth } from "../../hoc";
 import { PostCard, Users } from "./components";
@@ -12,7 +12,6 @@ const HomePage = () => {
   const { users, removeFriend, addFriend } = useUsers();
   const { addPost, posts } = usePosts();
   const { me } = useAuth();
-  const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
 
   const initialData = {
@@ -46,9 +45,14 @@ const HomePage = () => {
       <Layout page="home">
         <Container>
           <Row className="py-3">
-            <Col className="col-home">
+            <Col className="col-home" sm={8} md={3}>
               <aside>
-                <Card className="card-home" bg="dark" text="white">
+                <Card
+                  className="card-home"
+                  bg="dark"
+                  text="white"
+                  id="followers"
+                >
                   <Card.Body>
                     <Card.Title>Usuarios que seguís</Card.Title>
                     <Users
@@ -64,7 +68,12 @@ const HomePage = () => {
                     />
                   </Card.Body>
                 </Card>
-                <Card className="card-home" bg="dark" text="white">
+                <Card
+                  className="card-home"
+                  bg="dark"
+                  text="white"
+                  id="non-followers"
+                >
                   <Card.Body>
                     <Card.Title>Usuarios que aún no seguís</Card.Title>
                     <Users
@@ -78,7 +87,7 @@ const HomePage = () => {
                 </Card>
               </aside>
             </Col>
-            <Col className="col-home" xs={9}>
+            <Col className="col-home" sm={8} md={8}>
               <div>
                 <Card className="card-home" bg="dark" text="white">
                   <Card.Body>

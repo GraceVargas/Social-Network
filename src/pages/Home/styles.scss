@@ -2,7 +2,7 @@
     min-height: 100vh;
 
     .container {
-        max-width: 95%;
+        max-width: 100%;
     }
 
     .col-home {
@@ -20,6 +20,15 @@
             margin: 9px;
         }
     }
+    
+    #followers .card-body, #non-followers .card-body{
+        padding: 7px;
+    }
 
+    @media(max-width: 650px) {
+        .user-card{
+            font-size: 12px;
+        }
+    }
 
 }

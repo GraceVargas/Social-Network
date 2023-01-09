@@ -7,7 +7,7 @@ import { LoginFormType } from "../../types";
 import "./styles.scss";
 
 const LoginPage = () => {
-  const { login, me } = useAuth();
+  const { login } = useAuth();
 
   const { showAlert } = useAlert();
 
@@ -27,13 +27,17 @@ const LoginPage = () => {
       <Layout hideHeader hideFooter page="login">
         <Card className="card-login" bg="dark" text="white">
           <Card.Body>
-            <Card.Title className="text-center" as="h1">
+            <Card.Title className="text-center card-title" as="h1">
               ConectADAs
             </Card.Title>
             <Card.Subtitle className="mt-4" as="h5">
               Inicia sesión:
             </Card.Subtitle>
             <LoginForm onSubmit={handleSubmit} />
+            <p className="test-user">
+              ( Usuario de prueba: Email: user@prueba.com / Contraseña:
+              prueba12345 )
+            </p>
           </Card.Body>
           <Card.Footer>
             <small className="m-2">Si aún no tienes cuenta</small>
