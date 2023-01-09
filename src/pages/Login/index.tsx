@@ -27,7 +27,7 @@ const LoginPage = () => {
       <Layout hideHeader hideFooter page="login">
         <Card className="card-login" bg="dark" text="white">
           <Card.Body>
-            <Card.Title className="text-center" as="h1">
+            <Card.Title className="text-center card-title" as="h1">
               ConectADAs
             </Card.Title>
             <Card.Subtitle className="mt-4" as="h5">

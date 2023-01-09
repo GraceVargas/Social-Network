@@ -27,7 +27,7 @@ const PostCard: FC<Props> = ({ posts }) => {
               <Row>
                 <>
                   {post.image && (
-                    <Col xs={6} md={3}>
+                    <Col xs={6} lg={6} id="postImg-container">
                       <Card.Img
                         className="post-card-img"
                         variant="top"
@@ -36,8 +36,11 @@ const PostCard: FC<Props> = ({ posts }) => {
                       />
                     </Col>
                   )}
-                  <Col>
-                    <div className="d-flex justify-content-end">
+                  <Col xs={6} lg={6} id="postDetail-container">
+                    <div
+                      className="d-flex justify-content-end"
+                      id="user-date-detail"
+                    >
                       <Card.Subtitle className="mx-4 text-muted align-self-center">
                         {`${post.user.name} ${post.user.lastname}`}
                       </Card.Subtitle>
@@ -45,7 +48,7 @@ const PostCard: FC<Props> = ({ posts }) => {
                         {formatDate(post.date)}
                       </span>
                     </div>
-                    <Card.Title>{post.title}</Card.Title>
+                    <Card.Title className="card-title">{post.title}</Card.Title>
                     <Card.Text className="card-text my-3">
                       {post.detail}
                     </Card.Text>
