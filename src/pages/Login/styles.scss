@@ -12,6 +12,27 @@
         width: 50%;
         height: 400px;
         padding: 20px;
+
+        @media(max-width: 650px) {
+            width: 80%;
+        }
+
+        .card-title {
+            white-space: nowrap;
+        }
     }
 
+    .test-user {
+        font-size: 11px;
+        margin: 9px 0 0 0;
+    }
+
+}
+
+@media(max-width: 650px) {
+    .card-footer {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    
 }
