@@ -54,7 +54,7 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "homepage": "https:GraceVargas.github.io/${Social-Network}",
+  "homepage": "https:GraceVargas.github.io/Social-Network",
   "description": "",
   "devDependencies": {
     "customize-cra": "^1.0.0",
