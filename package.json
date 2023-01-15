@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d public",
     "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
