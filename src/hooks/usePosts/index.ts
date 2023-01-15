@@ -20,6 +20,7 @@ const usePosts = () => {
     const getPosts = async () => {
         try {
             const response = await postsApi.getAll();
+            response.reverse();
             loadPosts(response);           
         }  catch(err: any) {
             throw new Error(err.toString())
