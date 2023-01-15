@@ -1,3 +1,7 @@
 .pagination-container {
-    width: 300px;
+    width: 100%;
+
+    .pagination {
+        justify-content: center;
+    }
 }
