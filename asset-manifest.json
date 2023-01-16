@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.95ab8e2d.css",
-    "main.js": "/static/js/main.7cbf2c7a.js",
-    "index.html": "/index.html",
-    "main.95ab8e2d.css.map": "/static/css/main.95ab8e2d.css.map",
-    "main.7cbf2c7a.js.map": "/static/js/main.7cbf2c7a.js.map"
+    "main.css": "/GraceVargas.github.io/Social-Network/static/css/main.78190599.css",
+    "main.js": "/GraceVargas.github.io/Social-Network/static/js/main.3842c593.js",
+    "index.html": "/GraceVargas.github.io/Social-Network/index.html",
+    "main.78190599.css.map": "/GraceVargas.github.io/Social-Network/static/css/main.78190599.css.map",
+    "main.3842c593.js.map": "/GraceVargas.github.io/Social-Network/static/js/main.3842c593.js.map"
   },
   "entrypoints": [
-    "static/css/main.95ab8e2d.css",
-    "static/js/main.7cbf2c7a.js"
+    "static/css/main.78190599.css",
+    "static/js/main.3842c593.js"
   ]
 }
