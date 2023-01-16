@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/GraceVargas.github.io/Social-Network/static/css/main.78190599.css",
-    "main.js": "/GraceVargas.github.io/Social-Network/static/js/main.3842c593.js",
-    "index.html": "/GraceVargas.github.io/Social-Network/index.html",
-    "main.78190599.css.map": "/GraceVargas.github.io/Social-Network/static/css/main.78190599.css.map",
-    "main.3842c593.js.map": "/GraceVargas.github.io/Social-Network/static/js/main.3842c593.js.map"
+    "main.css": "/Social-Network/static/css/main.78190599.css",
+    "main.js": "/Social-Network/static/js/main.3842c593.js",
+    "index.html": "/Social-Network/index.html",
+    "main.78190599.css.map": "/Social-Network/static/css/main.78190599.css.map",
+    "main.3842c593.js.map": "/Social-Network/static/js/main.3842c593.js.map"
   },
   "entrypoints": [
     "static/css/main.78190599.css",
