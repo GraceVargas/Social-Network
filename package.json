@@ -30,6 +30,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-app-rewired eject"
   },
@@ -54,7 +55,7 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "homepage": "https:GraceVargas.github.io/Social-Network",
+  "homepage": "https://gracevargas.github.io/Social-Network",
   "description": "",
   "devDependencies": {
     "customize-cra": "^1.0.0",
